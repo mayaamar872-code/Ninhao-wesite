@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nin Hao - Хятад хэлний сургалтын төв</title>
+  <style>
+    :root {
+      --primary: #d92525;
+      --primary-hover: #b81d1d;
+      --accent-gold: #e5a93c;
+      --dark: #222222;
+      --light-bg: #f8f9fa;
+      --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: #ffffff;
+    }
+
+    header {
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-badge {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid #eaeaea;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .logo-badge .kanji {
+      color: var(--primary);
+      font-size: 1.1rem;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text h1 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #333;
+      line-height: 1.1;
+    }
+
+    .logo-text span {
+      font-size: 0.75rem;
+      color: var(--accent-gold);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+      padding: 5rem 2rem;
+      text-align: center;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .hero-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background-color: rgba(217, 37, 37, 0.1);
+      color: var(--primary);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h2 {
+      font-size: 2.2rem;
+      color: #111;
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: #555;
+      max-width: 750px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(217, 37, 37, 0.3);
+    }
+
+    .cta-btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    .section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h3 {
+      font-size: 2rem;
+      color: #111;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 10px;
+    }
+
+    .section-title h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background-color: var(--primary);
+      border-radius: 2px;
+    }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .course-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      border: 1px solid #f0f0f0;
+      transition: transform 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .course-header {
+      padding: 1.5rem;
+      color: white;
+      position: relative;
+    }
+
+    .level-hsk1 { background: linear-gradient(135deg, #20bf55 0%, #01baef 100%); }
+    .level-hsk2 { background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%); }
+    .level-hsk3 { background: linear-gradient(135deg, #f89b29 0%, #ff0f7b 100%); }
+    .level-hsk4 { background: linear-gradient(135deg, #f857a6 0%, #ff5858 100%); }
+
+    .course-header h4 {
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .course-header p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .course-body {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: flex-start;
+      flex-direction: column;
+    }
+
+    .info-list {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .info-list li {
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.95rem;
+    }
+
+    .info-icon {
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .bonus-tag {
+      background-color: #fff8e6;
+      color: #b78103;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      margin-top: auto;
+      border-left: 3px solid var(--accent-gold);
+    }
+
+    .enroll-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 10px;
+      background-color: #222;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      margin-top: 1rem;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .enroll-btn:hover {
+      background-color: var(--primary);
+    }
+
+    .about-section {
+      background-color: var(--light-bg);
+      border-radius: 16px;
+      padding: 3rem;
+      margin-top: 2rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    }
+
+    .contact-icon {
+      width: 45px;
+      height: 45px;
+      background-color: rgba(217, 37, 37, 0.1);
+      color: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .contact-info h5 {
+      font-size: 1rem;
+      color: #777;
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-info p {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #222;
+    }
+
+    footer {
+      background-color: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+    }
+
+    footer p {
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .hero h2 {
+        font-size: 1.6rem;
+      }
+      .hero p {
+        font-size: 1.05rem;
+      }
+      .about-section {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a href="#" class="logo-container">
+        <div class="logo-badge">
+          <span class="kanji">您好</span>
+        </div>
+        <div class="logo-text">
+          <h1>NIN HAO</h1>
+          <span>СУРГАЛТЫН ТӨВ</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#home">Нүүр</a></li>
+        <li><a href="#courses">Сургалтууд</a></li>
+        <li><a href="#about">Бидний тухай</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-container">
+      <span class="hero-badge">Өвөрмонгол багштай сургалт</span>
+      <h2>Хятад хэлийг системтэй, үр дүнтэй суралцгаая</h2>
+      <p>Бид анхан шатнаас эхлэн HSK 5 хүртэлх шаталсан хөтөлбөрөөр, гадаад багштай системтэй, үр дүнтэй сургалтыг хэрэгжүүлдэг боловсролын төв юм.</p>
+      <a href="#courses" class="cta-btn">Анги сонгох</a>
+    </div>
+  </section>
+
+  <section id="courses" class="section">
+    <div class="section-title">
+      <h3>Нээлттэй сургалтын ангиуд</h3>
+    </div>
+    <div class="courses-grid">
+
+      <!-- HSK 1 Night Class -->
+      <div class="course-card">
+        <div class="course-header level-hsk1">
+          <h4>HSK 1 - Анхан шат</h4>
+          <p>Насанд хүрэгчдийн суурьгүй оройн анги</p>
+        </div>
+        <div class="course-body">
+          <ul class="info-list">
+            <li><span class="info-icon">🗓</span> <strong>Өдөр:</strong> Даваа, Лхагва, Баасан</li>
+            <li><span class="info-icon">⏰</span> <strong>Цаг:</strong> 18:30 - 20:00</li>
+            <li><span class="info-icon">🚀</span> <strong>Эхлэх огноо:</strong> 10 сарын 12</li>
+          </ul>
+          <div class="bonus-tag">⚠️ Суудлын тоо хязгаартай!</div>
+          <a href="tel:72663888" class="enroll-btn">Бүртгүүлэх</a>
+        </div>
+      </div>
+
+      <!-- HSK 1 Full Schedule Class -->
+      <div class="course-card">
+        <div class="course-header level-hsk1">
+          <h4>HSK 1 - Анхан шат</h4>
+          <p>Өглөө, Өдөр, Оройн ээлжийн анги</p>
+        </div>
+        <div class="course-body">
+          <ul class="info-list">
+            <li><span class="info-icon">🗓</span> <strong>Өдөр:</strong> Даваа, Лхагва, Баасан</li>
+            <li><span class="info-icon">🌅</span> <strong>Өглөө:</strong> 09:00 - 10:30</li>
+            <li><span class="info-icon">☀️</span> <strong>Өдөр:</strong> 16:30 - 18:00</li>
+            <li><span class="info-icon">🌙</span> <strong>Орой:</strong> 18:30 - 20:00</li>
+          </ul>
+          <div class="bonus-tag">🎁 Албан ёсны сурах бичиг + Ханзны дэвтэр бэлгэнд!</div>
+          <a href="tel:72663888" class="enroll-btn">Бүртгүүлэх</a>
+        </div>
+      </div>
+
+      <!-- HSK 2 Class -->
+      <div class="course-card">
+        <div class="course-header level-hsk2">
+          <h4>HSK 2</h4>
+          <p>Дунд шатны бэлтгэл анги</p>
+        </div>
+        <div class="course-body">
+          <ul class="info-list">
+            <li><span class="info-icon">🗓</span> <strong>Өдөр:</strong> Мягмар, Пүрэв, Бямба</li>
+            <li><span class="info-icon">⏰</span> <strong>Цаг:</strong> 18:30 - 20:00</li>
+            <li><span class="info-icon">👨‍🏫</span> <strong>Багш:</strong> Өвөрмонгол багштай</li>
+          </ul>
+          <div class="bonus-tag">💡 Гурван найзтайгаа ирээд хөнгөлөлт аваарай</div>
+          <a href="tel:72663888" class="enroll-btn">Бүртгүүлэх</a>
+        </div>
+      </div>
+
+      <!-- HSK 3 Class -->
+      <div class="course-card">
+        <div class="course-header level-hsk3">
+          <h4>HSK 3</h4>
+          <p>Гүнзгийрүүлсэн анги</p>
+        </div>
+        <div class="course-body">
+          <ul class="info-list">
+            <li><span class="info-icon">🗓</span> <strong>Өдөр:</strong> Мягмар, Пүрэв, Бямба</li>
+            <li><span class="info-icon">⏰</span> <strong>Цаг:</strong> 16:30 - 18:00</li>
+            <li><span class="info-icon">👨‍🏫</span> <strong>Багш:</strong> Өвөрмонгол багштай</li>
+          </ul>
+          <a href="tel:72663888" class="enroll-btn">Бүртгүүлэх</a>
+        </div>
+      </div>
+
+      <!-- HSK 4 & Mock Test Class -->
+      <div class="course-card">
+        <div class="course-header level-hsk4">
+          <h4>HSK 4 | Тактик + Mock Test</h4>
+          <p>Шалгалтанд бэлтгэх тусгай анги</p>
+        </div>
+        <div class="course-body">
+          <ul class="info-list">
+            <li><span class="info-icon">🗓</span> <strong>Өдөр:</strong> Даваа, Лхагва, Баасан</li>
+            <li><span class="info-icon">📘</span> <strong>HSK4 (I+II):</strong> 18:00 - 19:30</li>
+            <li><span class="info-icon">📝</span> <strong>Тактик + Mock:</strong> 16:30 - 18:00</li>
+          </ul>
+          <a href="tel:72663888" class="enroll-btn">Бүртгүүлэх</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="about-section">
+      <div class="section-title">
+        <h3>Байршил ба Холбоо барих</h3>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-info">
+            <h5>Хаяг</h5>
+            <p>Нарны зам дагуу Соёлж молл зүүн талд Шинэ тэрэг плаза 5 давхар 502</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div class="contact-info">
+            <h5>Утасны дугаар</h5>
+            <p>+976 72663888</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📷</div>
+          <div class="contact-info">
+            <h5>Instagram</h5>
+            <p>@ninhaoeducation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Nin Hao Сургалтын Төв. Бүх эрх хуулиар хамгаалагдсан.</p>
+  </footer>
+
+</body>
+</html>
